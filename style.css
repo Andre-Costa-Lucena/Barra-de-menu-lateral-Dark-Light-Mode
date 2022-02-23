@@ -16,7 +16,7 @@
     --primary-color-light: #f6f5ff;
     --toggle-color: #ddd;
     --text-color: #707070;
-
+    
     /*== Transition ==*/
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
@@ -27,6 +27,17 @@
 body{
     height: 100vh;
     background: var(--body-color);
+    transition: var(--tran-05);
+}
+
+body.dark{
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+    
 }
 
 /*===sidebar===*/
@@ -39,19 +50,33 @@ body{
     width: 250px;
     padding: 10px 14px;
     background-color: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100;
 }
 
-/*===Resuable===*/
+.sidebar.close{
+    width: 88px;
+}
+
+/*===Resuable CSS===*/
 .sidebar .text{
     font-size: 16px;
     font-weight: 500;
     color: var(--text-color);
+    transition: var(--tran-03);
+    white-space: nowrap;
+    opacity: 1;
+}
+
+.sidebar.close .text{
+    opacity: 0;
 }
 
 .sidebar .image{
     min-width: 60px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .sidebar li{
@@ -106,7 +131,7 @@ header .image-text .header-text{
     position: absolute;
     top: 50%;
     right: -25px;
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(180deg);
     height: 25px;
     width: 25px;
     background: var(--primary-color);
@@ -116,10 +141,25 @@ header .image-text .header-text{
     border-radius: 50%;
     color: var(--sidebar-color);
     font-size: 22px;
+    transition: var(--tran-03);
+}
+
+.sidebar.close header .toggle{
+    transform: translateY(-50%);
+}
+
+body.dark .sidebar header .toggle{
+    color: var(--text-color);
+}
+
+.sidebar .menu{
+    margin-top: 35px;
 }
 
 .sidebar .search-box{
     background-color: var(--primary-color-light);
+    border-radius: 6px;
+    transition: var(--tran-05);
 }
 
 .search-box input{
@@ -128,7 +168,10 @@ header .image-text .header-text{
     outline: none;
     border: none;
     border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
     background-color: var(--primary-color-light);
+    transition: var(--tran-05);
 }
 
 .sidebar li a{
@@ -151,6 +194,11 @@ header .image-text .header-text{
     color: var(--sidebar-color);
 }
 
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text{
+    color: var(--text-color);
+}
+
 .sidebar .menu-bar{
     height: calc(100% - 50px);
     display: flex;
@@ -158,7 +206,9 @@ header .image-text .header-text{
     justify-content: space-between;
 }
 
-.sidebar .mode{
+.menu-bar .mode{
+    position: relative;
+    border-radius: 6px;
     background: var(--primary-color-light);
 }
 
@@ -171,19 +221,33 @@ header .image-text .header-text{
 
 .menu-bar .mode i{
     position: absolute;
+    transition: var(--tran-03);
 }
 
 .menu-bar .mode i.sun{
     opacity: 0;
 }
 
+body.dark .menu-bar .mode i.sun{
+    opacity: 1;
+}
+
+body.dark .menu-bar .mode i.moon{
+    opacity: 0;
+}
+
 .menu-bar .mode .toggle-switch{
+    position: absolute;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     min-width: 60px;
     cursor: pointer;
+    border-radius: 6px;
+    background: var(--primary-color-light);
+    transition: var(--tran-05);
 }
 
 .toggle-switch .switch{
@@ -204,8 +268,30 @@ header .image-text .header-text{
     left: 5px;
     transform: translateY(-50%);
     background: var(--sidebar-color);
+    transition: var(--tran-03);
 }
 
+body.dark .switch::before{
+    left: 24px;
+}
 
+.home{
+    position: relative;
+    height: 100vh;
+    left: 250px;
+    width: calc(100% - 250px);
+    background: var(--body-color);
+    transition: var(--tran-05);
+}
 
+.home .text{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 8px 40px;
+}
 
+.sidebar.close ~ .home{
+    left: 88px;
+    width: calc(100% - 88px);
+}
